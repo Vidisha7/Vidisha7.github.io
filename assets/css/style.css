@@ -231,7 +231,7 @@ section {
   background: antiquewhite;
   border-radius: 1000px;
   padding: 10px 20px;
-  margin: 40px;
+  /* margin: 40px; */
   box-shadow: 0 2px 5px 0 rgba(3,6,26,0.15);
   transition: .5s all ease-in-out;
   &:hover {

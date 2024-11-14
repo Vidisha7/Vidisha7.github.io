@@ -9,7 +9,7 @@ layout: default
     <!-- Call to Action Button -->
   <div class="hero-overlay d-flex justify-content-center align-items-center button-container">
   <!-- <span>We Provide<strong> BEST VISION CARE</strong></span> -->
-    <a href="#" class="button button-wiggle cta-button" data-bs-toggle="modal" data-bs-target="#googleFormModal">Book Appointment</a>
+    <a href="#" class="button button-wiggle cta-button" data-bs-toggle="modal" data-bs-target="#googleFormModal">Get in Touch</a>
     <!-- <a href="#" class="button button-wiggle">Book Appointment</a> -->
   </div>
   </div>
