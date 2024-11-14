@@ -3,15 +3,16 @@
     <div class="container">
       <div class="row g-4">
         {% for treatment in site.data.treatments %}
-        <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="col-sm-6 col-md-4 col-lg-3" >
           <div class="treatment-card">
             <div class="treatment-image">
               <img src="{{ treatment.image | relative_url }}" alt="{{ treatment.alt }}">
             </div>
             <div class="treatment-content">
-              <h5>{{ treatment.name }}</h5>
-              <p>{{ treatment.description }}</p>
-              <button type="button" class="button-enquire-now">Enquire Now</button>
+              <h6>{{ treatment.name }}</h6>
+              <p class="para">{{ treatment.description }} <a href=""><i class="bi bi-box-arrow-up-right me-2"></i></a></p>
+              
+              <!-- <button type="button" class="button-enquire-now">Enquire Now</button> -->
             </div>
           </div>
         </div>
