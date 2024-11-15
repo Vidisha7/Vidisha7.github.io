@@ -1,48 +1,96 @@
-<style>
-    .button-enquire-now {
-    color: #004d4d;
-    border: 2px solid #004d4d;
-    border-radius: 10px;
-    padding: 2px;
-    background: antiquewhite;
-
-}
-</style>
-
-<section id="treatments">
-    <h2>Our Eye Treatments</h2>
-    <div class="treatment-container">
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/lasik.jpg' | relative_url }}" alt="Lasik Surgery">
-            <p>Advanced LASIK surgery for vision correction.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
+<!-- Treatment Section -->
+<section class="treatment-section py-5" id="treatments">
+    <div class="container">
+      <div class="row g-4">
+        {% for treatment in site.data.treatments %}
+        <div class="col-sm-6 col-md-4 col-lg-3" >
+          <div class="treatment-card">
+            <div class="treatment-image">
+              <img src="{{ treatment.image | relative_url }}" alt="{{ treatment.alt }}">
+            </div>
+            <div class="treatment-content">
+              <h6>{{ treatment.name }}</h6>
+              <p class="para">{{ treatment.description }} <a href=""><i class="bi bi-box-arrow-up-right me-2"></i></a></p>
+              
+              <!-- <button type="button" class="button-enquire-now">Enquire Now</button> -->
+            </div>
+          </div>
         </div>
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/cataract.jpg' | relative_url }}" alt="Cataract Treatment">
-            <p>Comprehensive cataract treatment options.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
-        </div>
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/glaucoma.jpg' | relative_url }}" alt="Glaucoma Care">
-            <p>Early detection and treatment of glaucoma.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
-        </div>
-        
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/cornea.jpg' | relative_url }}" alt="Cornea Treatment">
-            <p>Early detection and treatment of cornea.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
-        </div>
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/retina.jpg' | relative_url }}" alt="Retina Treatment">
-            <p>Early detection and treatment of retina.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
-        </div>
-
-        <div class="treatment-item">
-            <img src="{{ '/assets/images/refractive.jpg' | relative_url }}" alt="refractive Surgery">
-            <p>Refractive Eye surgery imporves the refractive stare of the eye.</p>
-            <button type="button" class="button-enquire-now">enquire now</button>
-        </div>
+        {% endfor %}
+      </div>
     </div>
-</section>
+  </section>
+  
+  <!-- CSS Styles (add in your CSS file or within a <style> tag) -->
+  <style>
+  /* Treatment Section */
+  .treatment-section {
+    background-color: #f8f9fa;
+  }
+  
+  .treatment-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .treatment-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  .treatment-image {
+    height: 180px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  
+  .treatment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures all images have a uniform size */
+    transition: transform 0.3s ease;
+  }
+  
+  .treatment-card:hover .treatment-image img {
+    transform: scale(1.05);
+  }
+  
+  .treatment-content {
+    padding: 1rem;
+    text-align: center;
+  }
+  
+  .treatment-content h5 {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #4a535c;
+  }
+  
+  .treatment-content p {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .button-enquire-now {
+    margin-top: 1rem;
+    background-color: #28a745;
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button-enquire-now:hover {
+    background-color: #218838;
+    cursor: pointer;
+  }
+  </style>
+  

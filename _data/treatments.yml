@@ -1,3 +1,4 @@
+treatments:
 - name: LASIK Surgery
   image: "/assets/images/lasik.jpg"
   description: "Advanced LASIK surgery for precise vision correction."

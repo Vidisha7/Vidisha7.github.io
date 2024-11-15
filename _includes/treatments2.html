@@ -1,96 +1,190 @@
-<!-- Treatment Section -->
-<section class="treatment-section py-5" id="treatments">
-    <div class="container">
-      <div class="row g-4">
-        {% for treatment in site.data.treatments %}
-        <div class="col-sm-6 col-md-4 col-lg-3" >
-          <div class="treatment-card">
-            <div class="treatment-image">
-              <img src="{{ treatment.image | relative_url }}" alt="{{ treatment.alt }}">
-            </div>
-            <div class="treatment-content">
-              <h6>{{ treatment.name }}</h6>
-              <p class="para">{{ treatment.description }} <a href=""><i class="bi bi-box-arrow-up-right me-2"></i></a></p>
-              
-              <!-- <button type="button" class="button-enquire-now">Enquire Now</button> -->
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  
-  <!-- CSS Styles (add in your CSS file or within a <style> tag) -->
-  <style>
-  /* Treatment Section */
-  .treatment-section {
-    background-color: #f8f9fa;
-  }
-  
-  .treatment-card {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .treatment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  .treatment-image {
-    height: 180px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-  }
-  
-  .treatment-image img {
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap'); 
+
+  .slide-container {
+    max-width: 1120px;
     width: 100%;
+    padding: 40px 0;
+  }
+
+  .slide-content {
+    margin: 0 40px;
+    overflow: hidden;
+    border-radius: 25px;
+  }
+
+  .card {
+    border-radius: 25px;
+    background-color: #FFF;
+  }
+
+  .image-content,
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+  }
+
+  .image-content {
+    position: relative;
+    row-gap: 5px;
+    padding: 25px 0;
+  }
+
+  .overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 100%;
-    object-fit: cover; /* Ensures all images have a uniform size */
-    transition: transform 0.3s ease;
+    width: 100%;
+    background-color: #004d4d;
+    border-radius: 25px 25px 0 25px;
   }
-  
-  .treatment-card:hover .treatment-image img {
-    transform: scale(1.05);
+
+  .overlay::before,
+  .overlay::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 40px;
+    background-color: #004d4d;
   }
-  
-  .treatment-content {
-    padding: 1rem;
+
+  .overlay::after {
+    border-radius: 0 25px 0 0;
+    background-color: #FFF;
+  }
+
+  .card-image {
+    position: relative;
+    height: 210px;
+    width: 210px;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 3px;
+  }
+
+  .card-image .card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #004d4d;
+  }
+
+  .name {
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .description {
+    font-size: 14px;
+    color: #707070;
     text-align: center;
   }
-  
-  .treatment-content h5 {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #4a535c;
+
+  .swiper-navBtn {
+    color: #1e9393;
+    transition: color 0.3s ease;
   }
-  
-  .treatment-content p {
-    font-size: 0.9rem;
-    color: #6c757d;
+
+  .swiper-navBtn:hover {
+    color: #004d4d;
   }
-  
-  .button-enquire-now {
-    margin-top: 1rem;
-    background-color: #28a745;
-    color: #ffffff;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+
+  .swiper-navBtn::before,
+  .swiper-navBtn::after {
+    font-size: 35px;
   }
-  
-  .button-enquire-now:hover {
-    background-color: #218838;
-    cursor: pointer;
+
+  .swiper-button-next {
+    right: 0;
   }
-  </style>
-  
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-pagination-bullet {
+    background-color: #1e9393;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #004d4d;
+  }
+
+  @media screen and (max-width: 768px) {
+    .slide-content {
+      margin: 0 10px;
+    }
+
+    .swiper-navBtn {
+      display: none;
+    }
+  }
+</style>
+
+<div class="slide-container swiper">
+  <div class="slide-content">
+    <div class="card-wrapper swiper-wrapper">
+      {% for treatment in site.data.treatments.treatments %}
+      <div class="card swiper-slide">
+        <div class="image-content">
+          <span class="overlay"></span>
+          <div class="card-image">
+            <img src="{{ treatment.image }}" alt="{{ treatment.alt }}" class="card-img">
+          </div>
+        </div>
+        <div class="card-content">
+          <h2 class="name">{{ treatment.name }}</h2>
+          <p class="description">{{ treatment.description }}</p>
+          <button class="button1">View More</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="swiper-button-next swiper-navBtn"></div>
+  <div class="swiper-button-prev swiper-navBtn"></div>
+  <div class="swiper-pagination"></div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- JavaScript -->
+<script>
+  var swiper = new Swiper(".slide-content", {
+    slidesPerView: 3,
+    spaceBetween: 25,
+    loop: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+      dynamicBullets: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+      },
+      520: {
+        slidesPerView: 2,
+      },
+      950: {
+        slidesPerView: 3,
+      },
+    },
+  });
+</script>
